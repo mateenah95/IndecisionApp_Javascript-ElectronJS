@@ -2,20 +2,6 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const mainMenuTemplate = [
-    {
-        label: 'File',
-        submenu: [
-            {
-                label: 'Exit',
-                click(){
-                    electron.app.exit()
-                }
-            }
-        ]
-    }
-];  
-
 electron.app.on('ready', function (){
     //Create A New WIndow
     mainWindow = new electron.BrowserWindow({
@@ -33,9 +19,5 @@ electron.app.on('ready', function (){
         slashes: true
     });
     //Load HTML Into Window
-    mainWindow.loadURL('http://mateenah95.pythonanywhere.com');
-
-    const mainMenu = electron.Menu.buildFromTemplate(mainMenuTemplate);
-
-    electron.Menu.setApplicationMenu(mainMenu);
+    mainWindow.loadURL(myURL);
 });

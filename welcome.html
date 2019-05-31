@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Indecision</title>
+
+    <!--Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<style>
+    body{
+        font-family: 'Lobster';
+        background: #C9DDFF;
+        color: white;
+        text-align: center;
+    }
+
+    .wrapper{
+        background-color: #2C497F;
+        min-height: 100px;
+        color: #BDC667;
+        border-radius: 5px;
+    }
+
+    .title{
+        position: relative;
+        top: 25px;
+    }
+
+    .subtitleWrapper{
+        background-color: #84714F;
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .extention{
+        background-color: #2C497F;
+        color: #BDC667;
+        border-radius: 5px;
+        min-height: 125x;
+    }
+
+    #myInput{
+        position: relative;
+        top: 7.5px;
+        text-align: center;
+    }
+
+    .choicesWrapper{
+        background-color: #426A5A;
+        min-height: 100px;
+        border-radius: 5px;
+        text-align: center;
+    }
+    </style>
+
+<body>
+    <br>
+    <div class='container wrapper'>
+        <h1 class=' title align-middle text-center'>Welcome To Indecision</h1>
+    </div>
+    
+    <br>
+    <div class='subtitleWrapper'>
+        <h5 class="text-center">Choices can be hard. Indecision makes them easy!</h5>
+    </div>
+    <br>
+
+    <br>
+    <div class='container extention'>
+        <div class='form-group'>
+            <input id='myInput' type="text" class='form-control' placeholder='Chocies go here:' focus>
+            <br>
+            <button id='addButton' type='button' class='btn btn-warning btn-block'>Add</button>
+        </div>
+        <div class='form-group'>
+            <button id='clearButton' type='button' class='btn btn-danger btn-block'>Clear</button>
+            <button id='chooseButton' type='button' class='btn btn-primary btn-block'>Indecision</button>
+        </div>
+        <hr>
+    </div>
+
+    <div id='choicesContainer'>
+
+    </div>
+
+    <script>
+        function clear(){
+            document.getElementById('choicesContainer').innerHTML = '';
+            document.getElementById('myInput').value = '';
+        }
+
+        function addChoice(){
+            let newText = document.getElementById('myInput').value;
+
+            let newTextElement = "<div class='container choicesWrapper'><h2 style='position: relative; top: 25px;'>" + newText + "</h2></div><br>";
+            
+            document.getElementById('choicesContainer').innerHTML += newTextElement;
+
+            document.getElementById('myInput').value = '';
+            document.getElementById('myInput').focus;
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+        function makeChoice(){
+            document.getElementById('myInput').value = '';
+
+            let choiceCount = document.getElementById('choicesContainer').childElementCount;
+            let choice = getRandomInt(choiceCount);
+
+            let theChoices = document.getElementById('choicesContainer').children;
+
+            theChoices[choice].setAttribute('style', 'border: 5px solid #DC3545; color: #FFC107; background: #007BFF;')
+        }
+
+        document.getElementById('clearButton').onclick = clear;
+        document.getElementById('addButton').onclick = addChoice;
+        document.getElementById('chooseButton').onclick = makeChoice;
+    </script>
+
+</body>
+<script>
+    require('./renderer.js');
+</script>
+</html>
